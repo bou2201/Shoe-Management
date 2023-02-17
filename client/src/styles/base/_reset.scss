@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: $primary-font;
+  color: $black-color;
+  font-size: 16px;
+  background-color: #f8fafb;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.MuiButton-root {
+  background: #6f6af8 !important;
+}
+
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cfcece #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: inherit;
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #cfcece;
+  border-radius: 20px;
+  border: 3px solid inherit;
+  padding: 1px;
+}
+
+// .css-1oylxzo-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
+.css-hyxlzm,
+.css-1p3p75c-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: #6f6af8 !important;
+}
+
+.css-1aquho2-MuiTabs-indicator {
+  background-color: #6f6af8 !important;
+}
+
+.css-o4zssm-MuiButtonBase-root-MuiIconButton-root:hover {
+  background-color: #6f6af8 !important;
+}
+
+.css-1xijbd7-MuiBadge-badge {
+  background-color: #6f6af8 !important;
+  color: #fff !important;
+}

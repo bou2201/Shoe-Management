@@ -1,0 +1,133 @@
+.css-dip3t8 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.css-1jhxw7e {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
+  @media (max-width: 800px) {
+    border-radius: 0;
+  }
+}
+
+.css-mf2zkt {
+  button {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 0;
+      background-color: #fff;
+      border-radius: 100rem;
+      transition: all 0.3s linear;
+    }
+
+    &:hover::before {
+      height: 20px;
+    }
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+}
+
+.css-1ilq64f-MuiButtonBase-root-MuiIconButton-root:hover {
+  background-color: #fff !important;
+}
+
+.css-fayd5x-MenuButtonRef,
+.css-ylonsm {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 0;
+    background-color: #fff;
+    border-radius: 100rem;
+    transition: all 0.3s linear;
+  }
+}
+
+.css-fayd5x-MenuButtonRef:hover,
+.css-ylonsm:hover {
+  background-color: unset !important;
+  font-weight: bolder;
+
+  &::before {
+    height: 20px;
+  }
+}
+
+.css-t5fjmg-MenuButtonRef {
+  background-color: unset !important;
+  position: relative;
+  font-weight: bold;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 100rem;
+  }
+}
+
+.label-sidebar {
+  padding: 0 20px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.space {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  overflow: hidden;
+
+  &-style {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.sidebar-pos {
+  position: sticky;
+  position: -webkit-sticky;
+  height: 96vh;
+  display: flex;
+  top: 15px;
+  bottom: 15px;
+  left: 0;
+  z-index: 1000;
+}
+
+.toggle-menu {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+// #1c1a4f

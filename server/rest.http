@@ -1,0 +1,31 @@
+POST http://localhost:3007/admin/register
+Content-Type: application/json 
+
+{
+  "firstName": "Chuc",
+  "lastName": "Nguyen",
+  "email": "chuc123@gmail.com",
+  "password": "admin123",
+  "confirmPassword": "admin123"
+}
+
+###
+POST http://localhost:3007/admin/login
+Content-Type: application/json
+
+{
+  "email": "chuc123@gmail.com",
+  "password": "admin123"
+}
+
+###
+GET http://localhost:3007/admin/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodWMxMjM0NUBnbWFpbC5jb20iLCJpZCI6IjYzYTg4YjA5YzQ4MTY1NWNiYWFmOTM5YiIsImlhdCI6MTY3MTk5MDA0Mn0.XxgGh85N3ysla0Q3I1i-aYY634bkOkUU63oDcyOeHTs
+
+###
+POST http://localhost:3007/shoe/create
+Content-Type: application/json
+
+{
+
+}

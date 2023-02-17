@@ -1,0 +1,135 @@
+.dashboard-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-right: 50px;
+
+  &-content {
+    span {
+      opacity: 0.7;
+      font-size: 15px;
+    }
+  }
+
+  &-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 50%;
+      width: 0.5px;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin-top: 30px;
+
+  &-calendar {
+    .selected-date {
+      padding: 10px 20px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      border-radius: 20px;
+      margin-top: 16px;
+      font-size: 15px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    }
+  }
+
+  &-location {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 45px;
+  }
+
+  &-overview {
+    .content-box {
+      grid-gap: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+
+      @include responsive(max_lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .content-box-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        height: 160px;
+        // overflow: hidden;
+        position: relative;
+        transition: all linear 0.3s;
+        z-index: auto;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 20px;
+          background-color: $purple-color;
+          z-index: -100;
+          transition: all 0.3s linear;
+          transform: translateY(10px);
+          opacity: 0.7;
+        }
+
+        &:hover::after {
+          transform: translateY(0);
+        }
+
+        svg {
+          font-size: 30px;
+          color: $black-color;
+        }
+
+        p {
+          font-size: 15px;
+        }
+
+        .item-icons {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+        }
+      }
+
+    }
+  }
+}
+
+.content-title {
+  padding-left: 20px;
+  margin-bottom: 20px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: $purple-color;
+    border-radius: 100rem;
+  }
+}
