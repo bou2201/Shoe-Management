@@ -51,15 +51,15 @@ function BasicTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab icon={<ViewListIcon />} {...a11yProps(0)} />
-          <Tab icon={<ViewModuleIcon />} {...a11yProps(1)} />
+          <Tab icon={<ViewModuleIcon />} {...a11yProps(0)} />
+          <Tab icon={<ViewListIcon />} {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <ProductTable />
+        <ProductCard itemsPerPage={8} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ProductCard />
+        <ProductTable />
       </TabPanel>
     </Box>
   );

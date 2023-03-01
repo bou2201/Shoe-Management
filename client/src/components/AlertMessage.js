@@ -6,7 +6,7 @@ const AlertMessage = ({ info }) => {
     <Zoom in style={{ transitionDuration: 700 }}>
       <Stack
         sx={{
-          position: "absolute",
+          position: "fixed",
           top: { sm: 30, xs: 10 },
           right: { sm: 30, xs: 10 },
           zIndex: 1000,

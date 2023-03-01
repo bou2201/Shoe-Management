@@ -60,7 +60,25 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const authContextData = { login, authState };
+  const register = async (registerForm) => {
+    try {
+      const res = await axios.post(`${API_URL}/admin/register`, registerForm);
+
+      return res.data;
+    } catch (error) {
+      return { message: "Register failed", error: error };
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    dispatch({
+      type: "AUTH",
+      payload: { isAuthenticated: false, admin: null },
+    });
+  };
+
+  const authContextData = { login, register, logout, authState };
 
   return (
     <AuthContext.Provider value={authContextData}>

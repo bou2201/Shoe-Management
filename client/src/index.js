@@ -7,6 +7,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createTheme, ThemeProvider } from "@mui/material";
 import AuthContextProvider from "./contexts/AuthContext";
+import ProductContextProvider from "./contexts/ProductContext";
 
 const theme = createTheme({
   palette: {
@@ -25,9 +26,11 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <AuthContextProvider>
-        <ProSidebarProvider>
-          <App />
-        </ProSidebarProvider>
+        <ProductContextProvider>
+          <ProSidebarProvider>
+            <App />
+          </ProSidebarProvider>
+        </ProductContextProvider>
       </AuthContextProvider>
     </ThemeProvider>
   </React.StrictMode>

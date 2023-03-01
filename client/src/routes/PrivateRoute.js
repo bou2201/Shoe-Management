@@ -9,7 +9,11 @@ const PrivateRoute = () => {
   } = useContext(AuthContext);
 
   if (isLoading) {
-    return <SyncLoader color={"#368dd6"} margin={10} size={25} />;
+    return (
+      <div className="spinner">
+        <SyncLoader color={"#6f6af8"} margin={10} size={25} />
+      </div>
+    );
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;

@@ -35,6 +35,10 @@ img {
   background: #6f6af8 !important;
 }
 
+a:-webkit-any-link {
+  color: unset !important;
+}
+
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
@@ -77,4 +81,9 @@ img {
 .css-1xijbd7-MuiBadge-badge {
   background-color: #6f6af8 !important;
   color: #fff !important;
+}
+
+.css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+  border-radius: 8px !important;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
 }

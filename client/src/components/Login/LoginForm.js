@@ -4,6 +4,7 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   IconButton,
   InputAdornment,
   InputLabel,
@@ -14,7 +15,7 @@ import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 
-const LoginForm = ({ handleOnChange, handleSubmit, email, password }) => {
+const LoginForm = (props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -23,14 +24,14 @@ const LoginForm = ({ handleOnChange, handleSubmit, email, password }) => {
   };
 
   return (
-    <form className="login-input" onSubmit={handleSubmit}>
+    <form className="login-input" onSubmit={props.handleSubmit}>
       <TextField
         label="Email"
         name="email"
-        // value="admin1@gmail.com"
-        value={email}
-        onChange={handleOnChange}
-        required
+        value={props.email}
+        onChange={props.handleOnChange}
+        error={props.errorEmail}
+        helperText={props.textEmail}
         id="outlined-start-adornment"
         placeholder="Your Email ..."
         fullWidth
@@ -44,13 +45,12 @@ const LoginForm = ({ handleOnChange, handleSubmit, email, password }) => {
         sx={{ marginBottom: 2 }}
       />
       <FormControl variant="outlined" fullWidth>
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-password" error={props.errorPassword}>Password</InputLabel>
         <OutlinedInput
-          value={password}
-          // value="Admin@123"
           name="password"
-          onChange={handleOnChange}
-          required
+          value={props.password}
+          onChange={props.handleOnChange}
+          error={props.errorPassword}
           autoComplete="current-password"
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
@@ -69,6 +69,9 @@ const LoginForm = ({ handleOnChange, handleSubmit, email, password }) => {
           label="Password"
           placeholder="Your Password ..."
         />
+        {props.textPassword && (
+          <FormHelperText error={props.errorPassword}>{props.textPassword}</FormHelperText>
+        )}
       </FormControl>
       <FormControlLabel
         control={<Checkbox />}

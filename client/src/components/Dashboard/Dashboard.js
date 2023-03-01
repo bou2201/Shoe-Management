@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import { Grid } from "@mui/material";
@@ -7,9 +7,15 @@ import Overview from "./Overview";
 import CalendarComponent from "./Calendar";
 import Location from "./Location";
 import PageTitle from "../PageTitle";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Dashboard = () => {
   const location = useLocation();
+  const {
+    authState: {
+      admin: { name },
+    },
+  } = useContext(AuthContext);
 
   useEffect(() => {
     document.title = "Dashboard - Shoe Management";
@@ -17,7 +23,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <PageTitle title="Dashboard" />
+      <PageTitle title="Dashboard" name={name} />
       <section className="dashboard-content">
         <Overview />
         <Grid container spacing={5} columns={12} sx={{ overflow: "hidden" }}>

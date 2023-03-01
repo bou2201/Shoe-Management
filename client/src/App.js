@@ -17,6 +17,9 @@ import {
   Order,
   History,
   Cart,
+  Create,
+  Delete,
+  Update,
 } from "./components";
 import PrivateRoute from "./routes/PrivateRoute";
 
@@ -45,9 +48,12 @@ function App() {
               <Route path="register" element={<Register />} />
               <Route path="product" element={<Product />} />
               <Route path="product/:id" element={<Details />} />
+              <Route path="product/create" element={<Create />} />
+              <Route path="product/update/:id" element={<Update />} />
+              <Route path="product/delete/:id" element={<Delete />} />
               <Route path="orders" element={<Order />} />
               <Route path="history" element={<History />} />
-              <Route path="cart" element={<Cart/>}/>
+              <Route path="cart" element={<Cart />} />
             </Route>
           </Route>
         </Routes>

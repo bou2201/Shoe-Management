@@ -1,47 +1,58 @@
-import React from "react";
+import React, { useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 90,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-];
-
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  { id: 10, lastName: "Beli", firstName: "Ferrara", age: 44 },
-  { id: 11, lastName: "Nomanda", firstName: "Rossini", age: 36 },
-  { id: 12, lastName: "Rociu", firstName: "Harvey", age: 65 },
-];
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
+import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
+import { ProductContext } from "../../contexts/ProductContext";
+import { IconButton } from "@mui/material";
 
 const ProductTable = () => {
+  const {
+    productState: { products },
+  } = useContext(ProductContext);
+
+  const handleDelete = () => {};
+
+  const columns = [
+    { field: "no", headerName: "No", width: 70 },
+    { field: "name", headerName: "Name Product", width: 300 },
+    { field: "brand", headerName: "Brand", width: 150 },
+    { field: "price", headerName: "Price ($)", width: 150 },
+    { field: "status", headerName: "Status", width: 150 },
+    { field: "id", headerName: "ID", width: 100 },
+    {
+      field: "options",
+      headerName: "Options",
+      width: 200,
+      renderCell: (params) => (
+        <>
+          <IconButton onClick={() => handleDelete(params.row.id)}>
+            <AutoFixHighRoundedIcon />
+          </IconButton>
+          <IconButton onClick={() => handleDelete(params.row.id)}>
+            <LocalMallRoundedIcon />
+          </IconButton>
+          <IconButton onClick={() => handleDelete(params.row.id)}>
+            <DeleteRoundedIcon />
+          </IconButton>
+        </>
+      ),
+    },
+  ];
+
+  const rows = products.map((product, i) => ({
+    no: i + 1,
+    name: product.name,
+    brand: product.brand,
+    price: product.price,
+    status: product.status,
+    id: product._id,
+  }));
+
   return (
     <div
       style={{
-        height: 500,
+        height: 600,
         width: "100%",
         background: "#f2f2fd",
         borderRadius: 20,
@@ -51,12 +62,12 @@ const ProductTable = () => {
         rows={rows}
         columns={columns}
         pageSize={10}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
+        rowsPerPageOptions={[10]}
         sx={{
           borderRadius: 5,
           border: "none",
           boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+          padding: "0 20px",
         }}
       />
     </div>

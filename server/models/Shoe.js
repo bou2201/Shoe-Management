@@ -1,15 +1,22 @@
 import mongoose from "mongoose";
 import moment from "moment";
-
-const randomCode = Math.random().toString(36).substring(2, 14).toUpperCase();
+import randomString from "randomString";
 
 const ShoeSchema = mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  code: { type: String, default: randomCode, unique: true },
+  code: {
+    type: String,
+    default: () =>
+      randomString.generate({
+        length: 10,
+        charset: "alphanumeric",
+        capitalization: "uppercase",
+      }),
+  },
   brand: {
     type: String,
-    enum: ["Nike", "MLB", "Oxford", "Vans", "Local Brands", "Unknown"],
+    enum: ["Nike", "MLB", "Oxford", "Vans", "Unknown"],
     default: "Unknown",
   },
   price: { type: String, require: true },

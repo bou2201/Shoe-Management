@@ -10,6 +10,9 @@ import Details from "./Product/Details";
 import Order from "./Order/Order";
 import History from "./History/History";
 import Cart from "./Cart/Cart";
+import Create from "./Product/Options/Create";
+import Update from "./Product/Options/Update";
+import Delete from "./Product/Options/Delete";
 
 export {
   Loading,
@@ -24,4 +27,7 @@ export {
   Order,
   History,
   Cart,
+  Create,
+  Update,
+  Delete,
 };

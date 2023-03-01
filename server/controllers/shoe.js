@@ -12,10 +12,12 @@ export const getShoes = async (req, res) => {
   try {
     const allShoes = await Shoe.find({});
 
-    res.status(200).json({ count: allShoes.length, allShoes });
+    res.status(200).json({ success: true, count: allShoes.length, allShoes });
   } catch (err) {
     console.log(err);
-    res.status(500).json(`Server error: ${err.message}`);
+    res
+      .status(500)
+      .json({ success: false, message: `Server error: ${err.message}` });
   }
 };
 
@@ -30,10 +32,12 @@ export const getShoesByBrand = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Success", count: shoeBrands.length, shoeBrands });
+      .json({ success: true, count: shoeBrands.length, shoeBrands });
   } catch (error) {
     console.log(error);
-    res.status(500).json(`Server error: ${error.message}`);
+    res
+      .status(500)
+      .json({ success: false, message: `Server error: ${err.message}` });
   }
 };
 
@@ -47,10 +51,12 @@ export const getShoeDetails = async (req, res) => {
   try {
     const details = await Shoe.findOne({ _id: id });
 
-    res.status(200).json(details);
+    res.status(200).json({ success: true, details });
   } catch (error) {
     console.log(error);
-    res.status(500).json(`Server error: ${error.message}`);
+    res
+      .status(500)
+      .json({ success: false, message: `Server error: ${err.message}` });
   }
 };
 
@@ -101,7 +107,7 @@ export const createShoe = async (req, res) => {
 
       return res
         .status(201)
-        .json({ message: "Created successfully !", newShoe });
+        .json({ success: true, message: "Created successfully !", newShoe });
     }
 
     return res.status(400).json({ message: "Please select a file ..." });
@@ -167,4 +173,3 @@ export const deleteShoe = async (req, res) => {
     res.status(500).json(`Server error: ${error.message}`);
   }
 };
-

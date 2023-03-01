@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-
 import {
   Box,
   Button,
   FormControl,
+  FormHelperText,
   IconButton,
   InputAdornment,
   InputLabel,
@@ -14,7 +14,7 @@ import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -23,16 +23,16 @@ const RegisterForm = () => {
   };
 
   return (
-    <form className="register-input">
-      {/* <h1 style={{textAlign: "center", marginBottom: 30}}>Register Form</h1> */}
+    <form className="register-input" onSubmit={props.handleSubmit}>
       {/* Name */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
         <TextField
           label="First Name"
           name="firstName"
-          // value={email}
-          // onChange={handleOnChange}
-          required
+          value={props.firstName}
+          onChange={props.handleOnChange}
+          error={props.errorFirstName}
+          helperText={props.textFirstName}
           id="outlined-start-adornment"
           placeholder="Your First Name ..."
           fullWidth
@@ -41,9 +41,10 @@ const RegisterForm = () => {
         <TextField
           label="Last Name"
           name="lastName"
-          // value={email}
-          // onChange={handleOnChange}
-          required
+          value={props.lastName}
+          onChange={props.handleOnChange}
+          error={props.errorLastName}
+          helperText={props.textLastName}
           id="outlined-start-adornment"
           placeholder="Your First Name ..."
           fullWidth
@@ -54,9 +55,10 @@ const RegisterForm = () => {
       <TextField
         label="Email"
         name="email"
-        // value={email}
-        // onChange={handleOnChange}
-        required
+        value={props.email}
+        onChange={props.handleOnChange}
+        error={props.errorEmail}
+        helperText={props.textEmail}
         id="outlined-start-adornment"
         placeholder="Your Email ..."
         fullWidth
@@ -71,13 +73,13 @@ const RegisterForm = () => {
       />
       {/* Password */}
       <FormControl variant="outlined" fullWidth>
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-password" error={props.errorPassword}>Password</InputLabel>
         <OutlinedInput
           label="Password"
           name="password"
-          // value={password}
-          // onChange={handleOnChange}
-          required
+          value={props.password}
+          onChange={props.handleOnChange}
+          error={props.errorPassword}
           autoComplete="current-password"
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
@@ -96,16 +98,22 @@ const RegisterForm = () => {
           placeholder="Your Password ..."
           sx={{ marginBottom: 2 }}
         />
+        {props.textPassword && (
+          <FormHelperText error={props.errorPassword}>{props.textPassword}</FormHelperText>
+        )}
       </FormControl>
       {/* Confirm Password */}
       <FormControl variant="outlined" fullWidth>
-        <InputLabel htmlFor="outlined-adornment-confirm-password">Confirm</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-confirm-password" error={props.errorConfirm}>
+          Confirm
+        </InputLabel>
         <OutlinedInput
           label="Confirm"
           name="confirmPassword"
-          // value={password}
-          // onChange={handleOnChange}
-          required
+          value={props.confirmPassword}
+          onChange={props.handleOnChange}
+          error={props.errorConfirm}
+          // required
           // autoComplete="current-password"
           id="outlined-adornment-current-password"
           type={showPassword ? "text" : "password"}
@@ -123,6 +131,9 @@ const RegisterForm = () => {
           }
           placeholder="Confirm ..."
         />
+        {props.textConfirm && (
+          <FormHelperText error={props.errorConfirm}>{props.textConfirm}</FormHelperText>
+        )}
       </FormControl>
       <Button
         type="submit"
