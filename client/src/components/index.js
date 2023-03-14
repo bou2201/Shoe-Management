@@ -10,9 +10,9 @@ import Details from "./Product/Details";
 import Order from "./Order/Order";
 import History from "./History/History";
 import Cart from "./Cart/Cart";
-import Create from "./Product/Options/Create";
-import Update from "./Product/Options/Update";
-import Delete from "./Product/Options/Delete";
+import Create from "./Product/Create/Create";
+import Update from "./Product/Update/Update";
+import SearchResult from "./Product/Search/SearchResult";
 
 export {
   Loading,
@@ -29,5 +29,5 @@ export {
   Cart,
   Create,
   Update,
-  Delete,
+  SearchResult,
 };

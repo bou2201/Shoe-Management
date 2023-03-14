@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+
 import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
 import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
-import { ProductContext } from "../../contexts/ProductContext";
 import { IconButton } from "@mui/material";
+
+import DialogAlert from "../Delete/DialogAlert";
+import { ProductContext } from "../../../contexts/ProductContext";
 
 const ProductTable = () => {
   const {
     productState: { products },
+    deleteProduct,
   } = useContext(ProductContext);
-
-  const handleDelete = () => {};
 
   const columns = [
     { field: "no", headerName: "No", width: 70 },
@@ -26,15 +28,21 @@ const ProductTable = () => {
       width: 200,
       renderCell: (params) => (
         <>
-          <IconButton onClick={() => handleDelete(params.row.id)}>
-            <AutoFixHighRoundedIcon />
-          </IconButton>
-          <IconButton onClick={() => handleDelete(params.row.id)}>
-            <LocalMallRoundedIcon />
-          </IconButton>
-          <IconButton onClick={() => handleDelete(params.row.id)}>
-            <DeleteRoundedIcon />
-          </IconButton>
+          <Link to={`/dashboard/product/${params.row.id}`}>
+            <IconButton>
+              <LocalMallRoundedIcon />
+            </IconButton>
+          </Link>
+          <Link to={`/dashboard/product/update/${params.row.id}`}>
+            <IconButton>
+              <AutoFixHighRoundedIcon />
+            </IconButton>
+          </Link>
+          <DialogAlert
+            deleteProduct={deleteProduct}
+            _id={params.row.id}
+            name={params.row.name}
+          />
         </>
       ),
     },

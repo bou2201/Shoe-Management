@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import BasicTabs from "./BasicTabs";
-import PageTitle from "../PageTitle";
+import BasicTabs from "./Tabs/BasicTabs";
+import PageTitle from "../Shared/PageTitle";
 import { Button, Stack } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 

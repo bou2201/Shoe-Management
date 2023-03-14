@@ -24,7 +24,6 @@ const RegisterForm = (props) => {
 
   return (
     <form className="register-input" onSubmit={props.handleSubmit}>
-      {/* Name */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
         <TextField
           label="First Name"
@@ -72,8 +71,13 @@ const RegisterForm = (props) => {
         sx={{ marginBottom: 2 }}
       />
       {/* Password */}
-      <FormControl variant="outlined" fullWidth>
-        <InputLabel htmlFor="outlined-adornment-password" error={props.errorPassword}>Password</InputLabel>
+      <FormControl variant="outlined" fullWidth sx={{ marginBottom: 2 }}>
+        <InputLabel
+          htmlFor="outlined-adornment-password"
+          error={props.errorPassword}
+        >
+          Password
+        </InputLabel>
         <OutlinedInput
           label="Password"
           name="password"
@@ -96,15 +100,19 @@ const RegisterForm = (props) => {
             </InputAdornment>
           }
           placeholder="Your Password ..."
-          sx={{ marginBottom: 2 }}
         />
         {props.textPassword && (
-          <FormHelperText error={props.errorPassword}>{props.textPassword}</FormHelperText>
+          <FormHelperText error={props.errorPassword}>
+            {props.textPassword}
+          </FormHelperText>
         )}
       </FormControl>
       {/* Confirm Password */}
       <FormControl variant="outlined" fullWidth>
-        <InputLabel htmlFor="outlined-adornment-confirm-password" error={props.errorConfirm}>
+        <InputLabel
+          htmlFor="outlined-adornment-confirm-password"
+          error={props.errorConfirm}
+        >
           Confirm
         </InputLabel>
         <OutlinedInput
@@ -132,7 +140,9 @@ const RegisterForm = (props) => {
           placeholder="Confirm ..."
         />
         {props.textConfirm && (
-          <FormHelperText error={props.errorConfirm}>{props.textConfirm}</FormHelperText>
+          <FormHelperText error={props.errorConfirm}>
+            {props.textConfirm}
+          </FormHelperText>
         )}
       </FormControl>
       <Button

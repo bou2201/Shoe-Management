@@ -1,3 +1,5 @@
+import { AUTHENTICATION } from "../constants";
+
 const authReducer = (state, action) => {
   const {
     type,
@@ -5,7 +7,7 @@ const authReducer = (state, action) => {
   } = action;
 
   switch (type) {
-    case "AUTH":
+    case AUTHENTICATION:
       return {
         ...state,
         isLoading: false,

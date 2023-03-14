@@ -5,7 +5,7 @@ import { Badge, IconButton, Popover, useTheme } from "@mui/material";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 
-import EmptyImage from "../assets/empty.png";
+import EmptyImage from "../../assets/empty.png";
 
 const PageTitle = ({ title, name }) => {
   const theme = useTheme();

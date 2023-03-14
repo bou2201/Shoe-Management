@@ -18,8 +18,8 @@ import {
   History,
   Cart,
   Create,
-  Delete,
   Update,
+  SearchResult,
 } from "./components";
 import PrivateRoute from "./routes/PrivateRoute";
 
@@ -50,7 +50,10 @@ function App() {
               <Route path="product/:id" element={<Details />} />
               <Route path="product/create" element={<Create />} />
               <Route path="product/update/:id" element={<Update />} />
-              <Route path="product/delete/:id" element={<Delete />} />
+              <Route
+                path="product/search"
+                element={<SearchResult itemsPerPage={8} />}
+              />
               <Route path="orders" element={<Order />} />
               <Route path="history" element={<History />} />
               <Route path="cart" element={<Cart />} />

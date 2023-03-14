@@ -11,7 +11,7 @@ import Radio from "@mui/material/Radio";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 
-import PageTitle from "../PageTitle";
+import PageTitle from "../Shared/PageTitle";
 import { ProductContext } from "../../contexts/ProductContext";
 
 const DetailsProduct = ({

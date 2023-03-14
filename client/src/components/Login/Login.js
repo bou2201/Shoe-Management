@@ -8,7 +8,7 @@ import Banner from "../../assets/login-banner.png";
 import Logo from "../../assets/logo.png";
 
 import { AuthContext } from "../../contexts/AuthContext";
-import AlertMessage from "../AlertMessage";
+import AlertMessage from "../Shared/AlertMessage";
 import LoginForm from "./LoginForm";
 
 const Login = () => {
@@ -36,7 +36,7 @@ const Login = () => {
     onSubmit: async (values, { resetForm }) => {
       try {
         const loginData = await login(values);
-        console.log(values);
+        // console.log(values);
 
         if (!loginData.success) {
           setAlert({
@@ -81,7 +81,6 @@ const Login = () => {
     <>
       <section className="login">
         <AlertMessage info={alert} />
-
         <Container maxWidth="lg">
           <div className="login-layout">
             <div className="login-layout-banner">

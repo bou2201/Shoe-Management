@@ -36,14 +36,23 @@ const productReducer = (state, action) => {
         ...state,
         product: payload,
         isLoading: false,
-        // products: state.products.filter(product => product._id !== payload)
       };
 
     case UPDATE_PRODUCT:
-      return {};
+      const updatedProduct = state.products.map((product) =>
+        product._id === payload._id ? payload : product
+      );
+
+      return {
+        ...state,
+        products: updatedProduct,
+      };
 
     case DELETE_PRODUCT:
-      return {};
+      return {
+        ...state,
+        products: state.products.filter((product) => product._id !== payload),
+      };
 
     default:
       return state;

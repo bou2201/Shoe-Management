@@ -21,21 +21,26 @@ export const getShoes = async (req, res) => {
   }
 };
 
-export const getShoesByBrand = async (req, res) => {
-  const { brand } = req.query;
+export const getShoesByQuery = async (req, res) => {
+  const { name, brand } = req.query;
+  
   try {
-    const shoeBrands = await Shoe.aggregate([
-      {
-        $match: { brand },
-      },
-    ]);
+    const filter = {};
+    if (name) {
+      filter.name = { $regex: name, $options: "i" };
+    }
+    if (brand) {
+      filter.brand = { $regex: brand, $options: "i" };
+    }
+    
+    const searchResult = await Shoe.find(filter);
 
     res
       .status(200)
-      .json({ success: true, count: shoeBrands.length, shoeBrands });
+      .json({ success: true, count: searchResult.length, searchResult });
   } catch (error) {
     console.log(error);
-    res
+    ress
       .status(500)
       .json({ success: false, message: `Server error: ${err.message}` });
   }
@@ -130,7 +135,7 @@ export const createShoe = async (req, res) => {
 };
 
 export const updateShoe = async (req, res) => {
-  const { name, description, brand, price } = req.body;
+  const { name, description, brand, price, variants } = req.body;
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -138,19 +143,26 @@ export const updateShoe = async (req, res) => {
   }
 
   try {
-    let updatedShoe = {
-      name,
-      description: description || "",
-      brand,
-      price: formatPrice.format(price),
-      updateAt: new moment().format("LLLL"),
-    };
+    const updatedShoe = await Shoe.findByIdAndUpdate(
+      id,
+      {
+        name,
+        description: description || "",
+        brand,
+        price: formatPrice.format(price),
+        variants: JSON.parse(variants),
+        updateAt: new moment().format("LLLL"),
+      },
+      { new: true }
+    );
 
-    updatedShoe = await Shoe.findOneAndUpdate({ _id: id }, updatedShoe, {
-      new: true,
-    });
+    if (!updatedShoe) {
+      return res.status(404).json({ message: "Shoe not found" });
+    }
 
-    res.status(200).json({ message: "Updated Successfully !", updatedShoe });
+    res
+      .status(200)
+      .json({ success: true, message: "Updated Successfully !", updatedShoe });
   } catch (error) {
     console.log(error);
     res.status(500).json(`Server error: ${error.message}`);
@@ -167,7 +179,9 @@ export const deleteShoe = async (req, res) => {
   try {
     const deletedShoe = await Shoe.findOneAndDelete({ _id: id });
 
-    res.status(200).json({ message: "Deleted Successfully !", deletedShoe });
+    res
+      .status(200)
+      .json({ success: true, message: "Deleted Successfully !", deletedShoe });
   } catch (error) {
     console.log(error);
     res.status(500).json(`Server error: ${error.message}`);

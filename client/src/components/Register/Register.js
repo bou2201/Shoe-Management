@@ -2,22 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 import { Grid } from "@mui/material";
 
-import Banner from "../../assets/login-banner.png";
 import RegisterForm from "./RegisterForm";
-import PageTitle from "../PageTitle";
 import { AuthContext } from "../../contexts/AuthContext";
-import AlertMessage from "../AlertMessage";
-
-// const initialState = {
-//   firstName: "",
-//   lastName: "",
-//   email: "",
-//   password: "",
-//   confirmPassword: "",
-// };
+import PageTitle from "../Shared/PageTitle";
+import AlertMessage from "../Shared/AlertMessage";
 
 const Register = () => {
   const { register } = useContext(AuthContext);
@@ -164,7 +154,7 @@ const Register = () => {
             }}
           >
             <div className="register-banner">
-              <img src={Banner} alt="" />
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" alt="" />
             </div>
           </Grid>
         </Grid>

@@ -1,8 +1,9 @@
 import { createContext, useReducer, useEffect } from "react";
-import axios from "axios";
+
 import authReducer from "../reducers/authReducer";
-import { API_URL, ACCESS_TOKEN } from "../constants";
 import setAuthToken from "../utils/utils";
+import { ACCESS_TOKEN, AUTHENTICATION } from "../constants";
+import * as API from "../api";
 
 export const AuthContext = createContext();
 
@@ -21,11 +22,11 @@ const AuthContextProvider = ({ children }) => {
     }
 
     try {
-      const res = await axios.get(`${API_URL}/admin`);
+      const res = await API.fetchAdmins();
 
       if (res.data.success) {
         dispatch({
-          type: "AUTH",
+          type: AUTHENTICATION,
           payload: { isAuthenticated: true, admin: res.data.admin },
         });
       }
@@ -33,7 +34,7 @@ const AuthContextProvider = ({ children }) => {
       localStorage.removeItem(ACCESS_TOKEN);
       setAuthToken(null);
       dispatch({
-        type: "AUTH",
+        type: AUTHENTICATION,
         payload: { isAuthenticated: false, admin: null },
       });
       console.log(error);
@@ -46,7 +47,7 @@ const AuthContextProvider = ({ children }) => {
 
   const login = async (loginForm) => {
     try {
-      const res = await axios.post(`${API_URL}/admin/login`, loginForm);
+      const res = await API.login(loginForm);
 
       if (res.data.success) {
         localStorage.setItem(ACCESS_TOKEN, res.data.token);
@@ -62,7 +63,7 @@ const AuthContextProvider = ({ children }) => {
 
   const register = async (registerForm) => {
     try {
-      const res = await axios.post(`${API_URL}/admin/register`, registerForm);
+      const res = await API.register(registerForm);
 
       return res.data;
     } catch (error) {
@@ -73,7 +74,7 @@ const AuthContextProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     dispatch({
-      type: "AUTH",
+      type: AUTHENTICATION,
       payload: { isAuthenticated: false, admin: null },
     });
   };

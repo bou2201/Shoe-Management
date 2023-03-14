@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
 import { Grid } from "@mui/material";
 
 import Overview from "./Overview";
 import CalendarComponent from "./Calendar";
 import Location from "./Location";
-import PageTitle from "../PageTitle";
+import PageTitle from "../Shared/PageTitle";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Dashboard = () => {

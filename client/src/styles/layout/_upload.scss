@@ -1,0 +1,42 @@
+.image-upload {
+  border: 2px rgba(0, 0, 0, 0.4) dashed;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image-preview {
+  position: relative;
+
+  &-container {
+    max-height: 300px;
+    overflow: scroll;
+  }
+
+  button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: $purple-color;
+    color: #fff;
+    border-radius: 100rem;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+}
+
+.dropzone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px 0;
+  cursor: pointer;
+
+  p {
+    text-align: center;
+  }
+}

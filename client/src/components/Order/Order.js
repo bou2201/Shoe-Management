@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import PageTitle from "../PageTitle";
-import Empty from "../Empty";
+import PageTitle from "../Shared/PageTitle";
+import Empty from "../Shared/Empty";
 
 const Order = () => {
   const location = useLocation();

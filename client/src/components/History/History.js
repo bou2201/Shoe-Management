@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Empty from "../Empty";
-import PageTitle from "../PageTitle";
+import Empty from "../Shared/Empty";
+import PageTitle from "../Shared/PageTitle";
 
 const History = () => {
   const location = useLocation();

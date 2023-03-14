@@ -1,3 +1,4 @@
+import React, { useContext, useState, memo, useEffect } from "react";
 import {
   Button,
   Modal,
@@ -6,10 +7,10 @@ import {
   FormControl,
   InputLabel,
   Input,
-  InputAdornment,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import React, { useState } from "react";
+import { useFormik } from "formik";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ProductContext } from "../../contexts/ProductContext";
 
 const styleBox = {
   position: "absolute",
@@ -20,7 +21,7 @@ const styleBox = {
   boxShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;",
   p: 4,
   borderRadius: 3,
-  width: { lg: 600, md: 500, sm: 300 },
+  width: { lg: 600, md: 500, sm: 400 },
 };
 
 const styleButton = {
@@ -36,10 +37,61 @@ const styleButton = {
 };
 
 const SearchModal = (props) => {
+  const { searchProducts } = useContext(ProductContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useState(
+    new URLSearchParams(location.search)
+  );
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleSearch = async () => {
+    try {
+      const params = searchParams.toString();
+      await searchProducts(params);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    setSearchParams(new URLSearchParams(location.search));
+    handleSearch();
+  }, [location.search]);
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      brand: "",
+    },
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const params = new URLSearchParams();
+        if (values.name) {
+          params.set("name", values.name);
+        }
+        if (values.brand) {
+          params.set("brand", values.brand);
+        }
+
+        const queryString = params.toString();
+        setSearchParams(params);
+
+        navigate(`/dashboard/product/search?${queryString}`);
+      } catch (error) {
+        console.log(error);
+      }
+      resetForm({
+        values: {
+          name: "",
+          brand: "",
+        },
+      });
+      handleClose();
+    },
+  });
 
   return (
     <>
@@ -54,26 +106,47 @@ const SearchModal = (props) => {
       >
         <Box sx={styleBox}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Search Product
+            Searching
           </Typography>
-          <FormControl fullWidth sx={{ mt: 2 }} variant="standard">
-            <InputLabel htmlFor="standard-adornment-search">
-              Name or ID
-            </InputLabel>
-            <Input
-              id="standard-adornment-search"
-              startAdornment={
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              }
-              sx={{ padding: "5px 0" }}
-            />
-          </FormControl>
+          <form onSubmit={formik.handleSubmit}>
+            <FormControl fullWidth sx={{ mt: 2 }} variant="standard">
+              <InputLabel htmlFor="standard-adornment-search">Name</InputLabel>
+              <Input
+                id="standard-adornment-search"
+                name="name"
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                sx={{ padding: "5px 0" }}
+              />
+            </FormControl>
+            <FormControl fullWidth sx={{ mt: 2 }} variant="standard">
+              <InputLabel htmlFor="standard-adornment-search">Brand</InputLabel>
+              <Input
+                id="standard-adornment-search"
+                name="brand"
+                value={formik.values.brand}
+                onChange={formik.handleChange}
+                sx={{ padding: "5px 0" }}
+              />
+            </FormControl>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                textAlign: "center",
+                display: "block",
+                mt: 5,
+                ml: "auto",
+                mr: "auto",
+              }}
+            >
+              Search
+            </Button>
+          </form>
         </Box>
       </Modal>
     </>
   );
 };
 
-export default SearchModal;
+export default memo(SearchModal);
