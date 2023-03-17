@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { ProductContext } from "../../../contexts/ProductContext";
+import { addShoe } from "../../../store/features/productSlice";
 import CreateForm from "./CreateForm";
 import PageTitle from "../../Shared/PageTitle";
 import AlertMessage from "../../Shared/AlertMessage";
@@ -22,8 +23,8 @@ const initVariants = [
 
 const Create = () => {
   const [alert, setAlert] = useState(null);
-  const { createProduct } = useContext(ProductContext);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "Create Product - Shoe Management";
@@ -49,9 +50,9 @@ const Create = () => {
         setAlert({
           type: "error",
           status: "Error",
-          message: "You must choose at least 1.",
+          message: "You must choose at least 1 image.",
         });
-        return setTimeout(() => setAlert(null), 3000);
+        return setTimeout(() => setAlert(null), 5000);
       }
 
       try {
@@ -65,7 +66,7 @@ const Create = () => {
         });
         formData.append("variants", JSON.stringify(values.variants));
 
-        const newProduct = await createProduct(formData);
+        const newProduct = await dispatch(addShoe(formData));
         if (!newProduct.success) {
           setAlert({
             type: "error",

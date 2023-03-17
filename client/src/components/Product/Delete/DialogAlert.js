@@ -9,9 +9,12 @@ import {
   IconButton,
 } from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import { useDispatch } from "react-redux";
+import { removeShoe } from "../../../store/features/productSlice";
 
-const DialogAlert = ({ deleteProduct, _id, name }) => {
+const DialogAlert = ({ _id, name }) => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -32,14 +35,19 @@ const DialogAlert = ({ deleteProduct, _id, name }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Deleting a product: <b>"{name}"</b> may directly affect the data in the system.
+            Deleting a product: <b>"{name}"</b> may directly affect the data in
+            the system.
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ padding: "16px 24px" }}>
           <Button onClick={handleClose} variant="contained">
             Not Sure
           </Button>
-          <Button type="submit" variant="contained" onClick={deleteProduct.bind(this, _id)}>
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={() => dispatch(removeShoe(_id))}
+          >
             Sure
           </Button>
         </DialogActions>

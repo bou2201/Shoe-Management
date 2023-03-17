@@ -1,4 +1,4 @@
-import React, { useContext, useState, memo, useEffect } from "react";
+import React, { useState, memo, useEffect } from "react";
 import {
   Button,
   Modal,
@@ -10,7 +10,9 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ProductContext } from "../../contexts/ProductContext";
+import { useDispatch } from "react-redux";
+
+import { searchShoes } from "../../store/features/productSlice";
 
 const styleBox = {
   position: "absolute",
@@ -37,7 +39,7 @@ const styleButton = {
 };
 
 const SearchModal = (props) => {
-  const { searchProducts } = useContext(ProductContext);
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useState(
@@ -50,7 +52,7 @@ const SearchModal = (props) => {
   const handleSearch = async () => {
     try {
       const params = searchParams.toString();
-      await searchProducts(params);
+      await dispatch(searchShoes(params));
     } catch (err) {
       console.log(err);
     }
@@ -59,6 +61,7 @@ const SearchModal = (props) => {
   useEffect(() => {
     setSearchParams(new URLSearchParams(location.search));
     handleSearch();
+    // eslint-disable-next-line
   }, [location.search]);
 
   const formik = useFormik({

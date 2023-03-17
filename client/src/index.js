@@ -1,37 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ProSidebarProvider } from "react-pro-sidebar";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { ThemeProvider } from "@mui/material";
 import "@fontsource/poppins";
+
+import store, { persistor } from "./store/store";
+import theme from "./theme";
 import "./styles/style.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createTheme, ThemeProvider } from "@mui/material";
-import AuthContextProvider from "./contexts/AuthContext";
-import ProductContextProvider from "./contexts/ProductContext";
-
-const theme = createTheme({
-  palette: {
-    mainColor: {
-      purple: "#6f6af8",
-      purpleLight: "#f2f2fd",
-    },
-  },
-  typography: {
-    fontFamily: ["Poppins", "sans-serif"].join(","),
-  },
-});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <AuthContextProvider>
-        <ProductContextProvider>
-          <ProSidebarProvider>
+      <ProSidebarProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
             <App />
-          </ProSidebarProvider>
-        </ProductContextProvider>
-      </AuthContextProvider>
+          </PersistGate>
+        </Provider>
+      </ProSidebarProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

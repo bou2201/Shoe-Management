@@ -179,7 +179,7 @@ const UpdateForm = (props) => {
           <h4 className="content-title">Size & Quantity</h4>
         </Grid>
         {/* Variants */}
-        {props.variants &&
+        {props.variants === Object &&
           props?.variants.map((variant, i) => (
             <Grid item md={2} xs={4} key={i}>
               <TextField

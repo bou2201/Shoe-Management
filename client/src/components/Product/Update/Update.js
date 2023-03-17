@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { ProductContext } from "../../../contexts/ProductContext";
+import {
+  fetchShoeDetails,
+  editShoe,
+} from "../../../store/features/productSlice";
 import UpdateForm from "./UpdateForm";
 import PageTitle from "../../Shared/PageTitle";
 import AlertMessage from "../../Shared/AlertMessage";
@@ -12,11 +17,15 @@ const Update = () => {
   const { id } = useParams();
   const productRef = useRef(null);
   const [alert, setAlert] = useState(null);
-  const {
-    productState: { product },
-    detailsProduct,
-    updateProduct,
-  } = useContext(ProductContext);
+  // const {
+  //   productState: { product },
+  //   detailsProduct,
+  //   updateProduct,
+  // } = useContext(ProductContext);
+
+  const dispatch = useDispatch();
+  const productState = useSelector((state) => state.product);
+  const { product } = productState;
 
   const formik = useFormik({
     initialValues: {
@@ -36,8 +45,8 @@ const Update = () => {
     onSubmit: async (values) => {
       try {
         values.variants = JSON.stringify(values.variants);
-        const updated = await updateProduct({ _id: id, ...values });
-
+        const updated = await dispatch(editShoe({ _id: id, ...values }));
+        
         if (!updated.success) {
           setAlert({
             type: "error",
@@ -56,8 +65,10 @@ const Update = () => {
         console.log(updated);
       } catch (error) {
         console.log(error);
+      } finally {
+        values.variants = JSON.parse(values.variants);
+        console.log(values.variants);
       }
-      values.variants = JSON.parse(values.variants);
     },
   });
 
@@ -68,10 +79,10 @@ const Update = () => {
 
   useEffect(() => {
     if (id !== productRef.current) {
-      detailsProduct(id);
+      dispatch(fetchShoeDetails(id));
       productRef.current = id;
     }
-  }, [id, detailsProduct]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     document.title = `${product?.name}`;

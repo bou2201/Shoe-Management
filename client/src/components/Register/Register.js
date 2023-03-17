@@ -1,18 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Grid } from "@mui/material";
 
+import { register } from "../../store/features/authSlice";
 import RegisterForm from "./RegisterForm";
 import { AuthContext } from "../../contexts/AuthContext";
 import PageTitle from "../Shared/PageTitle";
 import AlertMessage from "../Shared/AlertMessage";
 
 const Register = () => {
-  const { register } = useContext(AuthContext);
+  // const { register } = useContext(AuthContext);
   const location = useLocation();
   const [alert, setAlert] = useState(null);
+
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -43,7 +47,7 @@ const Register = () => {
       }
 
       try {
-        const registerData = await register(values);
+        const registerData = await dispatch(register(values));
 
         if (!registerData.success) {
           setAlert({
@@ -154,7 +158,10 @@ const Register = () => {
             }}
           >
             <div className="register-banner">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" alt="" />
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                alt=""
+              />
             </div>
           </Grid>
         </Grid>

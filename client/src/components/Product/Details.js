@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -12,6 +13,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 
 import PageTitle from "../Shared/PageTitle";
+import { fetchShoeDetails } from "../../store/features/productSlice";
 import { ProductContext } from "../../contexts/ProductContext";
 
 const DetailsProduct = ({
@@ -103,10 +105,13 @@ const Details = () => {
   const { id } = useParams();
   const productRef = useRef(null);
 
-  const {
-    productState: { product },
-    detailsProduct,
-  } = useContext(ProductContext);
+  // const {
+  //   productState: { product },
+  //   detailsProduct,
+  // } = useContext(ProductContext);
+  const dispatch = useDispatch();
+  const productState = useSelector((state) => state.product);
+  const { product } = productState;
 
   const [quantity, setQuantity] = useState(1);
 
@@ -119,10 +124,10 @@ const Details = () => {
 
   useEffect(() => {
     if (id !== productRef.current) {
-      detailsProduct(id);
+      dispatch(fetchShoeDetails(id));
       productRef.current = id;
     }
-  }, [id, detailsProduct]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     document.title = `${product?.name}`;

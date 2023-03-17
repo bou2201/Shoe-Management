@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Grid } from "@mui/material";
 
@@ -6,15 +6,13 @@ import Overview from "./Overview";
 import CalendarComponent from "./Calendar";
 import Location from "./Location";
 import PageTitle from "../Shared/PageTitle";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const location = useLocation();
-  const {
-    authState: {
-      admin: { name },
-    },
-  } = useContext(AuthContext);
+
+  const authState = useSelector((state) => state.auth.admin);
+  const { name } = authState;
 
   useEffect(() => {
     document.title = "Dashboard - Shoe Management";

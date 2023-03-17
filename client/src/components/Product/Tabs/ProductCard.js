@@ -1,23 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useSelector, useDispatch } from "react-redux";
+
+import { getShoes } from "../../../store/features/productSlice";
 import { ProductContext } from "../../../contexts/ProductContext";
 import CardItem from "../../Shared/CardItem";
 
 const ProductCard = ({ itemsPerPage }) => {
   const [itemOffset, setItemOffset] = useState(0);
-  const {
-    productState: { products },
-    getProducts,
-  } = useContext(ProductContext);
+  const productState = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+
+  const { products } = productState;
 
   useEffect(() => {
-    try {
-      getProducts();
-    } catch (error) {
-      console.log(error);
-    }
-    // eslint-disable-next-line
+    dispatch(getShoes());
   }, []);
+
+  // const {
+  //   productState: { products },
+  //   getProducts,
+  // } = useContext(ProductContext);
+
+  // useEffect(() => {
+  //   try {
+  //     getProducts();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   // eslint-disable-next-line
+  // }, []);
 
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = products.slice(itemOffset, endOffset);
@@ -30,7 +42,7 @@ const ProductCard = ({ itemsPerPage }) => {
 
   return (
     <>
-      <CardItem currentItems={currentItems}/>
+      <CardItem currentItems={currentItems} />
       <ReactPaginate
         breakLabel="..."
         nextLabel=">"

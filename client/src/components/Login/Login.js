@@ -1,4 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container } from "@mui/material";
 import { useFormik } from "formik";
@@ -7,19 +8,16 @@ import * as Yup from "yup";
 import Banner from "../../assets/login-banner.png";
 import Logo from "../../assets/logo.png";
 
-import { AuthContext } from "../../contexts/AuthContext";
 import AlertMessage from "../Shared/AlertMessage";
 import LoginForm from "./LoginForm";
 
-const Login = () => {
-  const {
-    login,
-    authState: { isAuthenticated },
-  } = useContext(AuthContext);
+import { login } from "../../store/features/authSlice";
 
+const Login = () => {
+  const authState = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-
   const [alert, setAlert] = useState(null);
 
   const formik = useFormik({
@@ -35,8 +33,7 @@ const Login = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        const loginData = await login(values);
-        // console.log(values);
+        const loginData = await dispatch(login(values));
 
         if (!loginData.success) {
           setAlert({
@@ -65,7 +62,7 @@ const Login = () => {
   }, [location]);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (authState.isAuthenticated) {
       setTimeout(() => {
         return navigate("/dashboard");
       }, 1000);

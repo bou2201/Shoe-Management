@@ -1,15 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useSelector } from "react-redux";
 
-import { ProductContext } from "../../../contexts/ProductContext";
 import PageTitle from "../../Shared/PageTitle";
 import Empty from "../../Shared/Empty";
 import CardItem from "../../Shared/CardItem";
 
 const SearchResult = ({ itemsPerPage }) => {
-  const {
-    productState: { products },
-  } = useContext(ProductContext);
+  const productState = useSelector((state) => state.product);
+  const { products } = productState;
 
   const [itemOffset, setItemOffset] = useState(0);
 
@@ -29,8 +28,7 @@ const SearchResult = ({ itemsPerPage }) => {
         <h4 className="content-title">All Shoes</h4>
         {products.length > 0 ? (
           <>
-            {/* <SearchCard currentItems={currentItems} /> */}
-            <CardItem currentItems={currentItems}/>
+            <CardItem currentItems={currentItems} />
             <ReactPaginate
               breakLabel="..."
               nextLabel=">"

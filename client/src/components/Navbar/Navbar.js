@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Menu, MenuItem, Sidebar, useProSidebar } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom";
 
@@ -13,11 +14,11 @@ import HistoryIcon from "@mui/icons-material/History";
 import SearchModal from "./SearchModal";
 import ToggleCollapse from "./ToggleCollapse";
 import ToggleMenu from "./ToggleMenu";
-import { AuthContext } from "../../contexts/AuthContext";
+import { logout } from "../../store/features/authSlice";
 
 const Navbar = () => {
   const location = useLocation();
-  const { logout } = useContext(AuthContext);
+  const dispatch = useDispatch();
   const [activeCollapse, setActiveCollapse] = useState(true);
   const [pathname, setPathname] = useState("/dashboard");
   const { collapseSidebar, toggleSidebar, broken } = useProSidebar();
@@ -81,7 +82,7 @@ const Navbar = () => {
           >
             Register
           </MenuItem>
-          <MenuItem icon={<LogoutIcon />} onClick={() => logout()}>
+          <MenuItem icon={<LogoutIcon />} onClick={() => dispatch(logout())}>
             Logout
           </MenuItem>
         </Menu>
