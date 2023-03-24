@@ -1,0 +1,28 @@
+.cart-item-image {
+  width: 160px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.cart-item-name {
+  margin-bottom: 10px;
+}
+.cart-item-span {
+  font-size: 15px;
+  opacity: 0.8;
+
+  b {
+    font-style: italic;
+  }
+}
+.cart-total-due {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}

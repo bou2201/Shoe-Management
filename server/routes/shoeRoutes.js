@@ -16,9 +16,7 @@ router.get("/search", getShoesByQuery);
 router.get("/:id", getShoeDetails);
 
 router.post("/create", uploadCloud.array("image", 4), createShoe);
-
 router.put("/update/:id", updateShoe) 
-
 router.delete("/delete/:id", deleteShoe)
 
 export default router;

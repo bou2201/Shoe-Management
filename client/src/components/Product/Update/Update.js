@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { ProductContext } from "../../../contexts/ProductContext";
 import {
   fetchShoeDetails,
   editShoe,
@@ -17,11 +16,6 @@ const Update = () => {
   const { id } = useParams();
   const productRef = useRef(null);
   const [alert, setAlert] = useState(null);
-  // const {
-  //   productState: { product },
-  //   detailsProduct,
-  //   updateProduct,
-  // } = useContext(ProductContext);
 
   const dispatch = useDispatch();
   const productState = useSelector((state) => state.product);
@@ -46,7 +40,7 @@ const Update = () => {
       try {
         values.variants = JSON.stringify(values.variants);
         const updated = await dispatch(editShoe({ _id: id, ...values }));
-        
+
         if (!updated.success) {
           setAlert({
             type: "error",
@@ -67,7 +61,6 @@ const Update = () => {
         console.log(error);
       } finally {
         values.variants = JSON.parse(values.variants);
-        console.log(values.variants);
       }
     },
   });

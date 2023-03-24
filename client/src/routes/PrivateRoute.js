@@ -1,13 +1,8 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
-
 import { useSelector } from "react-redux";
 
 const PrivateRoute = () => {
-  // const {
-  //   authState: { isLoading, isAuthenticated },
-  // } = useContext(AuthContext);
-
   const authState = useSelector((state) => state.auth);
 
   if (authState.isLoading) {

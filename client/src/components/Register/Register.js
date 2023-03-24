@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
@@ -7,12 +7,10 @@ import { Grid } from "@mui/material";
 
 import { register } from "../../store/features/authSlice";
 import RegisterForm from "./RegisterForm";
-import { AuthContext } from "../../contexts/AuthContext";
 import PageTitle from "../Shared/PageTitle";
 import AlertMessage from "../Shared/AlertMessage";
 
 const Register = () => {
-  // const { register } = useContext(AuthContext);
   const location = useLocation();
   const [alert, setAlert] = useState(null);
 

@@ -179,7 +179,7 @@ const UpdateForm = (props) => {
           <h4 className="content-title">Size & Quantity</h4>
         </Grid>
         {/* Variants */}
-        {props.variants === Object &&
+        {typeof props.variants === "object" &&
           props?.variants.map((variant, i) => (
             <Grid item md={2} xs={4} key={i}>
               <TextField
@@ -220,20 +220,20 @@ const UpdateForm = (props) => {
         gap="20px"
       >
         <Button
+          variant="outlined"
+          size="large"
+          sx={{ textTransform: "capitalize" }}
+          onClick={handleBack}
+        >
+          Go Back
+        </Button>
+        <Button
           type="submit"
           variant="contained"
           size="large"
           sx={{ textTransform: "capitalize" }}
         >
           Update
-        </Button>
-        <Button
-          variant="contained"
-          size="large"
-          sx={{ textTransform: "capitalize" }}
-          onClick={handleBack}
-        >
-          Go Back
         </Button>
       </Stack>
     </form>

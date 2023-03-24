@@ -11,6 +11,9 @@ export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
+    loadingRequest: (state) => {
+      state.isLoading = true;
+    },
     loadingSuccess: (state, action) => {
       state.isLoading = false;
       state.products = action.payload;
@@ -82,6 +85,7 @@ export const fetchShoeDetails = (productId) => async (dispatch) => {
 };
 
 export const addShoe = (newProduct) => async (dispatch) => {
+  dispatch(loadingRequest());
   try {
     const res = await API.createShoe(newProduct);
 
@@ -125,6 +129,7 @@ export const removeShoe = (productId) => async (dispatch) => {
 const { actions, reducer } = productSlice;
 
 export const {
+  loadingRequest,
   loadingSuccess,
   loadingFailure,
   createProduct,

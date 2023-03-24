@@ -40,7 +40,7 @@ const DialogAlert = ({ _id, name }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ padding: "16px 24px" }}>
-          <Button onClick={handleClose} variant="contained">
+          <Button onClick={handleClose} variant="outlined">
             Not Sure
           </Button>
           <Button

@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { DataGrid } from "@mui/x-data-grid";
 import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
@@ -8,18 +8,9 @@ import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 import { IconButton } from "@mui/material";
 
 import DialogAlert from "../Delete/DialogAlert";
-import { ProductContext } from "../../../contexts/ProductContext";
 
 const ProductTable = () => {
-  // const {
-  //   productState: { products },
-  //   deleteProduct,
-  // } = useContext(ProductContext);
-
-  const productState = useSelector((state) => state.product);
-  const dispatch = useDispatch();
-
-  const { products } = productState;
+  const { products } = useSelector((state) => state.product);
 
   const columns = [
     { field: "no", headerName: "No", width: 70 },

@@ -31,9 +31,9 @@ img {
   object-fit: cover;
 }
 
-.MuiButton-root {
-  background: #6f6af8 !important;
-}
+// .MuiButton-root {
+//   background: $purple-color !important;
+// }
 
 a:-webkit-any-link {
   color: unset !important;
@@ -67,19 +67,25 @@ a:-webkit-any-link {
 // .css-1oylxzo-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
 .css-hyxlzm,
 .css-1p3p75c-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  color: #6f6af8 !important;
+  color: $purple-color !important;
 }
 
 .css-1aquho2-MuiTabs-indicator {
-  background-color: #6f6af8 !important;
+  background-color: $purple-color !important;
 }
 
 .css-o4zssm-MuiButtonBase-root-MuiIconButton-root:hover {
-  background-color: #6f6af8 !important;
+  background-color: $purple-color !important;
 }
 
+.MuiButton-outlined {
+  border: 1px solid $purple-color !important;
+  color: $purple-color !important;
+}
+
+.MuiButton-contained,
 .css-1xijbd7-MuiBadge-badge {
-  background-color: #6f6af8 !important;
+  background-color: $purple-color !important;
   color: #fff !important;
 }
 

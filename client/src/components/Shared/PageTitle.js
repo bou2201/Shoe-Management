@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { Badge, IconButton, Popover, useTheme } from "@mui/material";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
@@ -10,6 +11,7 @@ import EmptyImage from "../../assets/empty.png";
 const PageTitle = ({ title, name }) => {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
+  const { cart } = useSelector((state) => state.cart);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,7 +36,7 @@ const PageTitle = ({ title, name }) => {
       </div>
       <div className="dashboard-title-icon">
         <Link to="/dashboard/cart">
-          <Badge color="primary" badgeContent={0} max={9} showZero>
+          <Badge color="primary" badgeContent={cart.length} max={9} showZero>
             <IconButton
               sx={{ color: theme.palette.mainColor.purple }}
               aria-label="cart"

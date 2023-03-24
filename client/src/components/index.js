@@ -6,7 +6,7 @@ import ErrorPage from "./ErrorPage/ErrorPage";
 import Register from "./Register/Register";
 import Dashboard from "./Dashboard/Dashboard";
 import Product from "./Product/Product";
-import Details from "./Product/Details";
+import Details from "./Product/Details/Details";
 import Order from "./Order/Order";
 import History from "./History/History";
 import Cart from "./Cart/Cart";

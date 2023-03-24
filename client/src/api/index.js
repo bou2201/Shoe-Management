@@ -28,3 +28,10 @@ export const updateShoe = (payload) =>
       Accept: "application/json",
     },
   });
+
+// Handle Cart
+export const fetchCart = (adminId) => axios.get(`${API_URL}/cart/${adminId}`);
+export const addToCart = (adminId, payload) =>
+  axios.post(`${API_URL}/cart/${adminId}`, payload);
+export const removeFromCart = (adminId, id) =>
+  axios.delete(`${API_URL}/cart/${adminId}/${id}`);

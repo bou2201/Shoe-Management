@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getShoes } from "../../../store/features/productSlice";
-import { ProductContext } from "../../../contexts/ProductContext";
 import CardItem from "../../Shared/CardItem";
 
 const ProductCard = ({ itemsPerPage }) => {
@@ -15,21 +14,8 @@ const ProductCard = ({ itemsPerPage }) => {
 
   useEffect(() => {
     dispatch(getShoes());
+    // eslint-disable-next-line
   }, []);
-
-  // const {
-  //   productState: { products },
-  //   getProducts,
-  // } = useContext(ProductContext);
-
-  // useEffect(() => {
-  //   try {
-  //     getProducts();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   // eslint-disable-next-line
-  // }, []);
 
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = products.slice(itemOffset, endOffset);

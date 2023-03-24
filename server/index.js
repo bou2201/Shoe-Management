@@ -5,6 +5,7 @@ import cors from "cors";
 
 import adminRoutes from "./routes/adminRoutes.js";
 import shoeRoutes from "./routes/shoeRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/shoes", shoeRoutes);
+app.use("/api/cart", cartRoutes);
 
 const PORT = process.env.PORT || 5000;
 const DB_USERNAME = process.env.DB_USERNAME;
@@ -32,7 +34,7 @@ try {
     .connect(DB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: "Shoe_management_DB"
+      dbName: "Shoe_management_DB",
     })
     .then(() =>
       app.listen(PORT, (req, res) => console.log(`listening on port ${PORT}`))

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -25,6 +25,9 @@ const Create = () => {
   const [alert, setAlert] = useState(null);
   const location = useLocation();
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.product);
+
+  console.log(isLoading);
 
   useEffect(() => {
     document.title = "Create Product - Shoe Management";
