@@ -32,7 +32,6 @@ const RegisterForm = (props) => {
           onChange={props.handleOnChange}
           error={props.errorFirstName}
           helperText={props.textFirstName}
-          id="outlined-start-adornment"
           placeholder="Your First Name ..."
           fullWidth
           sx={{ marginBottom: 2 }}
@@ -44,7 +43,6 @@ const RegisterForm = (props) => {
           onChange={props.handleOnChange}
           error={props.errorLastName}
           helperText={props.textLastName}
-          id="outlined-start-adornment"
           placeholder="Your First Name ..."
           fullWidth
           sx={{ marginBottom: 2 }}
@@ -58,7 +56,6 @@ const RegisterForm = (props) => {
         onChange={props.handleOnChange}
         error={props.errorEmail}
         helperText={props.textEmail}
-        id="outlined-start-adornment"
         placeholder="Your Email ..."
         fullWidth
         InputProps={{
@@ -85,7 +82,6 @@ const RegisterForm = (props) => {
           onChange={props.handleOnChange}
           error={props.errorPassword}
           autoComplete="current-password"
-          id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
           endAdornment={
             <InputAdornment position="end">

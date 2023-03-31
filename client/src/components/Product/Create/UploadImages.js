@@ -42,16 +42,6 @@ const UploadImages = ({ setFieldValue, image }) => {
           </div>
         ))}
       </div>
-      {/* <div className="image-path-container">
-        <h3>Selected files:</h3>
-        <ul>
-          {imagePath.map((file, index) => (
-            <li key={index}>
-              {file.name} - {file.path}
-            </li>
-          ))}
-        </ul>
-      </div> */}
     </div>
   );
 };

@@ -5,22 +5,23 @@ import {
   FormControlLabel,
   FormControl,
 } from "@mui/material";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 import Radio from "@mui/material/Radio";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import { addToCart } from "../../../store/features/cartSlice";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 import AlertMessage from "../../Shared/AlertMessage";
-import { useNavigate } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 
 const DetailsProduct = ({ product }) => {
   const [quantityMax, setQuantityMax] = useState(null);
   const [alert, setAlert] = useState(null);
   const { admin } = useSelector((state) => state.auth);
+  const { isLoading } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -30,6 +31,7 @@ const DetailsProduct = ({ product }) => {
       price: product?.price,
       size: "",
       quantity: 1,
+      quantityMax: quantityMax,
       image: product?.image[0],
     },
     enableReinitialize: true,
@@ -54,7 +56,6 @@ const DetailsProduct = ({ product }) => {
           });
           setTimeout(() => {
             setAlert(null);
-            navigate("/dashboard/cart");
           }, 1500);
         }
         console.log(newItem);
@@ -63,8 +64,13 @@ const DetailsProduct = ({ product }) => {
       }
       resetForm({
         values: {
+          shoeId: product?._id,
+          name: product?.name,
+          brand: product?.brand,
+          price: product?.price,
           size: "",
           quantity: 1,
+          image: product?.image[0],
         },
       });
     },
@@ -87,11 +93,18 @@ const DetailsProduct = ({ product }) => {
 
   return (
     <>
+      <Loading loading={isLoading} />
       <AlertMessage info={alert} />
       <div className="product-images">
         {product?.image.map((img, index) => (
-          <img src={img} alt={product?.name} key={index} />
+          <LazyLoadImage
+            src={img}
+            alt={product?.name}
+            key={index}
+            effect="opacity"
+          />
         ))}
+        {/* <img src={img} alt={product?.name} key={index} /> */}
       </div>
       <form className="product-info" onSubmit={handleSubmit}>
         <h1 className="product-info-name">{product?.name}</h1>

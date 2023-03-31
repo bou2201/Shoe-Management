@@ -14,25 +14,7 @@ import {
   Badge,
   FormHelperText,
 } from "@mui/material";
-
-const brands = [
-  {
-    value: "Nike",
-    label: "Nike",
-  },
-  {
-    value: "MLB",
-    label: "MLB",
-  },
-  {
-    value: "Vans",
-    label: "Vans",
-  },
-  {
-    value: "Unknown",
-    label: "Unknown",
-  },
-];
+import { brands } from "../../../constants";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {

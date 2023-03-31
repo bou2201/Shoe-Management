@@ -9,7 +9,7 @@ const CalendarComponent = () => {
   return (
     <div className="dashboard-content-calendar">
       <h4 className="content-title">Calendar</h4>
-      <Calendar onChange={setValue} value={value} />
+      <Calendar onChange={setValue} value={value} locale="en-GB" />
       <p className="selected-date">
         Current selected date is: <b>{moment(value).format("LL")}</b>
       </p>

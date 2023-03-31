@@ -12,25 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import UploadImages from "./UploadImages";
-
-const brands = [
-  {
-    value: "Nike",
-    label: "Nike",
-  },
-  {
-    value: "MLB",
-    label: "MLB",
-  },
-  {
-    value: "Vans",
-    label: "Vans",
-  },
-  {
-    value: "Unknown",
-    label: "Unknown",
-  },
-];
+import { brands } from "../../../constants";
 
 const CreateForm = (props) => {
   const navigate = useNavigate();
@@ -167,20 +149,20 @@ const CreateForm = (props) => {
         gap="20px"
       >
         <Button
+          variant="outlined"
+          size="large"
+          sx={{ textTransform: "capitalize" }}
+          onClick={handleBack}
+        >
+          Go Back
+        </Button>
+        <Button
           type="submit"
           variant="contained"
           size="large"
           sx={{ textTransform: "capitalize" }}
         >
           Create
-        </Button>
-        <Button
-          variant="contained"
-          size="large"
-          sx={{ textTransform: "capitalize" }}
-          onClick={handleBack}
-        >
-          Go Back
         </Button>
       </Stack>
     </form>

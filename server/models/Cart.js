@@ -30,6 +30,9 @@ const CartItemSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  quantityMax: {
+    type: Number,
+  }
 });
 
 const CartSchema = mongoose.Schema({

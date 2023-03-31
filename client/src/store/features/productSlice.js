@@ -61,6 +61,7 @@ export const searchShoes = (params) => async (dispatch) => {
 };
 
 export const getShoes = () => async (dispatch) => {
+  dispatch(loadingRequest());
   try {
     const res = await API.fetchShoes();
 
@@ -73,6 +74,7 @@ export const getShoes = () => async (dispatch) => {
 };
 
 export const fetchShoeDetails = (productId) => async (dispatch) => {
+  dispatch(loadingRequest());
   try {
     const res = await API.fetchShoe(productId);
 
@@ -100,6 +102,7 @@ export const addShoe = (newProduct) => async (dispatch) => {
 };
 
 export const editShoe = (updatedProduct) => async (dispatch) => {
+  dispatch(loadingRequest());
   try {
     const res = await API.updateShoe(updatedProduct);
 

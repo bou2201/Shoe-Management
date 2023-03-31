@@ -31,6 +31,8 @@ export const updateShoe = (payload) =>
 
 // Handle Cart
 export const fetchCart = (adminId) => axios.get(`${API_URL}/cart/${adminId}`);
+export const updateCart = (adminId, payload) =>
+  axios.put(`${API_URL}/cart/update/${adminId}`, payload);
 export const addToCart = (adminId, payload) =>
   axios.post(`${API_URL}/cart/${adminId}`, payload);
 export const removeFromCart = (adminId, id) =>

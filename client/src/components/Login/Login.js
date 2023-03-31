@@ -7,18 +7,19 @@ import * as Yup from "yup";
 
 import Banner from "../../assets/login-banner.png";
 import Logo from "../../assets/logo.png";
-
 import AlertMessage from "../Shared/AlertMessage";
 import LoginForm from "./LoginForm";
-
 import { login } from "../../store/features/authSlice";
+import Loading from "../Loading/Loading";
 
 const Login = () => {
-  const authState = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+
   const [alert, setAlert] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -42,14 +43,7 @@ const Login = () => {
             message: "Incorrect your email or password - Try again",
           });
           setTimeout(() => setAlert(null), 3000);
-        } else {
-          setAlert({
-            type: "success",
-            status: "Success",
-            message: "Logged in to the system!",
-          });
-          setTimeout(() => setAlert(null), 1000);
-        }
+        } 
       } catch (error) {
         console.log(error);
       }
@@ -62,12 +56,14 @@ const Login = () => {
   }, [location]);
 
   useEffect(() => {
-    if (authState.isAuthenticated) {
-      setTimeout(() => {
-        return navigate("/dashboard");
+    if (isAuthenticated) {
+      setIsLoading(true);
+      const timeout = setTimeout(() => {
+        navigate("/dashboard");
       }, 1000);
+      return () => clearTimeout(timeout);
     }
-  });
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,6 +72,7 @@ const Login = () => {
 
   return (
     <>
+      <Loading loading={isLoading} />
       <section className="login">
         <AlertMessage info={alert} />
         <Container maxWidth="lg">

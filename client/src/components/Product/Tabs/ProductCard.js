@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getShoes } from "../../../store/features/productSlice";
 import CardItem from "../../Shared/CardItem";
+import Loading from "../../Loading/Loading";
 
 const ProductCard = ({ itemsPerPage }) => {
   const [itemOffset, setItemOffset] = useState(0);
-  const productState = useSelector((state) => state.product);
+  const { products, isLoading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-
-  const { products } = productState;
 
   useEffect(() => {
     dispatch(getShoes());
@@ -28,6 +27,7 @@ const ProductCard = ({ itemsPerPage }) => {
 
   return (
     <>
+      <Loading loading={isLoading}/>
       <CardItem currentItems={currentItems} />
       <ReactPaginate
         breakLabel="..."

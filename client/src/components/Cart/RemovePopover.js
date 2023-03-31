@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, IconButton, Popover, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
@@ -7,7 +7,7 @@ import { removeFromCart } from "../../store/features/cartSlice";
 
 const RemovePopover = ({ adminId, _id }) => {
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

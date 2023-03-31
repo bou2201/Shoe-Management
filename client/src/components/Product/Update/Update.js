@@ -11,6 +11,7 @@ import {
 import UpdateForm from "./UpdateForm";
 import PageTitle from "../../Shared/PageTitle";
 import AlertMessage from "../../Shared/AlertMessage";
+import Loading from "../../Loading/Loading";
 
 const Update = () => {
   const { id } = useParams();
@@ -18,8 +19,7 @@ const Update = () => {
   const [alert, setAlert] = useState(null);
 
   const dispatch = useDispatch();
-  const productState = useSelector((state) => state.product);
-  const { product } = productState;
+  const { product, isLoading } = useSelector((state) => state.product);
 
   const formik = useFormik({
     initialValues: {
@@ -83,6 +83,7 @@ const Update = () => {
 
   return (
     <>
+      <Loading loading={isLoading}/>
       <AlertMessage info={alert} />
       <PageTitle title="Update Product" />
       <section className="product-update">

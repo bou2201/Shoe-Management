@@ -62,6 +62,7 @@ const Register = () => {
           });
           setTimeout(() => setAlert(null), 3000);
         }
+        console.log(registerData);
       } catch (error) {
         console.log(error);
       }
@@ -98,9 +99,7 @@ const Register = () => {
           columns={12}
           sx={{
             alignItems: "center",
-            background: "#f2f2fd",
-            borderRadius: 5,
-            overflow: "hidden",
+
             margrinTop: 10,
           }}
         >
@@ -108,7 +107,16 @@ const Register = () => {
             item
             md={6}
             xs={12}
-            sx={{ padding: { md: "40px", xs: "40px 20px" } }}
+            sx={{
+              padding: {
+                md: "40px",
+                xs: "40px 20px",
+              },
+              background: "#f2f2fd",
+              borderRadius: 5,
+              overflow: "hidden",
+              boxShadow: "rgba(0, 0, 0, 0.04) 0px 3px 5px",
+            }}
           >
             <RegisterForm
               handleOnChange={formik.handleChange}

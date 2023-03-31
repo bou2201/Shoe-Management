@@ -14,6 +14,9 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    loadingRequest: (state) => {
+      state.isLoading = true;
+    },
     authenticateSuccess: (state, action) => {
       state.isAuthenticated = true;
       state.isLoading = false;
@@ -27,7 +30,9 @@ export const authSlice = createSlice({
   },
 });
 
+// Thunk
 export const authenticate = () => async (dispatch) => {
+  dispatch(loadingRequest());
   if (localStorage[ACCESS_TOKEN]) {
     setAuthToken(localStorage[ACCESS_TOKEN]);
   }
@@ -53,9 +58,9 @@ export const login = (loginForm) => async (dispatch) => {
     if (res.data.success) {
       localStorage.setItem(ACCESS_TOKEN, res.data.token);
     }
-    
+
     await dispatch(authenticate());
-    
+
     return res.data;
   } catch (error) {
     return { message: "Login failed", error: error };
@@ -79,6 +84,7 @@ export const logout = () => async (dispatch) => {
 
 const { actions, reducer } = authSlice;
 
-export const { authenticateSuccess, authenticateFailed } = actions;
+export const { loadingRequest, authenticateSuccess, authenticateFailed } =
+  actions;
 
 export default reducer;

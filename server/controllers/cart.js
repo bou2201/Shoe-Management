@@ -7,11 +7,9 @@ export const getCart = async (req, res) => {
     const cart = await Cart.findOne({ admin: adminId });
 
     if (!cart) {
-      res.status(200).json({ success: true, items: [], total: 0 });
+      res.status(200).json({ success: true, items: [] });
     } else {
-      res
-        .status(200)
-        .json({ success: true, items: cart.items, total: cart.totalPrice });
+      res.status(200).json({ success: true, items: cart.items });
     }
   } catch (error) {
     console.log(error);
@@ -21,7 +19,8 @@ export const getCart = async (req, res) => {
 
 export const addToCart = async (req, res) => {
   const { adminId } = req.params;
-  const { shoeId, name, brand, size, price, quantity, image } = req.body;
+  const { shoeId, name, brand, size, price, quantity, quantityMax, image } =
+    req.body;
 
   try {
     let cart = await Cart.findOne({ admin: adminId });
@@ -30,7 +29,9 @@ export const addToCart = async (req, res) => {
       // Create new if not existing
       cart = new Cart({
         admin: adminId,
-        items: [{ shoeId, name, brand, size, price, quantity, image }],
+        items: [
+          { shoeId, name, brand, size, price, quantity, quantityMax, image },
+        ],
       });
     } else {
       let existItem = false;
@@ -45,11 +46,19 @@ export const addToCart = async (req, res) => {
       }
 
       if (!existItem) {
-        cart.items.push({ shoeId, brand, name, size, price, quantity, image });
+        cart.items.push({
+          shoeId,
+          brand,
+          name,
+          size,
+          price,
+          quantity,
+          quantityMax,
+          image,
+        });
       }
-
-      cart.total += price * quantity;
     }
+    
     await cart.save();
 
     res
@@ -62,7 +71,7 @@ export const addToCart = async (req, res) => {
 };
 
 export const removeCartItem = async (req, res) => {
-  const { adminId, id  } = req.params;
+  const { adminId, id } = req.params;
 
   try {
     const cart = await Cart.findOne({ admin: adminId });
@@ -85,6 +94,43 @@ export const removeCartItem = async (req, res) => {
     res
       .status(200)
       .json({ success: true, message: "Removing Cart Success", cart });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(`Server error: ${error.message}`);
+  }
+};
+
+export const updateCart = async (req, res) => {
+  const { adminId } = req.params;
+  const { items } = req.body;
+
+  try {
+    const cart = await Cart.findOne({ admin: adminId });
+
+    if (!cart) {
+      res.status(404).json({ message: "Cart not found" });
+      return;
+    }
+
+    for (let i = 0; i < items.length; i++) {
+      const { id, quantity } = items[i];
+      const itemIndex = cart.items.findIndex(
+        (item) => item._id.toString() === id
+      );
+
+      if (itemIndex === -1) {
+        res
+          .status(404)
+          .json({ message: `Item with id ${id} not found in cart` });
+        return;
+      }
+
+      cart.items[itemIndex].quantity = quantity;
+    }
+
+    await cart.save();
+
+    res.status(200).json({ success: true, message: "Cart updated", cart });
   } catch (error) {
     console.log(error);
     res.status(500).json(`Server error: ${error.message}`);

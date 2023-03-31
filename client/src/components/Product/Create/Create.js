@@ -8,6 +8,7 @@ import { addShoe } from "../../../store/features/productSlice";
 import CreateForm from "./CreateForm";
 import PageTitle from "../../Shared/PageTitle";
 import AlertMessage from "../../Shared/AlertMessage";
+import Loading from "../../Loading/Loading";
 
 const initVariants = [
   { size: "36", quantity: null || 10 },
@@ -26,8 +27,6 @@ const Create = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.product);
-
-  console.log(isLoading);
 
   useEffect(() => {
     document.title = "Create Product - Shoe Management";
@@ -115,6 +114,7 @@ const Create = () => {
 
   return (
     <>
+      <Loading loading={isLoading}/>
       <AlertMessage info={alert} />
       <PageTitle title="Create product" />
       <section className="product-content">

@@ -1,10 +1,20 @@
 import React from "react";
-import { SyncLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 
 const Loading = ({ loading }) => {
-  return (
-    <div className="spinner">
-      <SyncLoader color={"#6f6af8"} margin={10} loading={loading} size={25} />
+  return !loading ? (
+    <></>
+  ) : (
+    <div className="wrapper-spinner">
+      <div className="spinner">
+        <HashLoader
+          color={"#6f6af8"}
+          loading={loading}
+          size={60}
+          speedMultiplier={0.8}
+        />
+        <h3>Loading ...</h3>
+      </div>
     </div>
   );
 };

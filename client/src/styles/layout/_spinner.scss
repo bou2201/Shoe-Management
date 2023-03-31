@@ -1,11 +1,33 @@
-.spinner {
+// .spinner {
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 20px;
+//   z-index: 1001;
+// }
+
+.wrapper-spinner {
   position: fixed;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  inset: 0;
   z-index: 1001;
-  background-color: rgba(255, 255, 255, 0.6);
-  pointer-events: fill;
+  transition: all 0.7s ease-in-out;
+  background-color: rgba(247, 247, 247, 0.5);
+
+  .spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 1001;
+  }
 }
